@@ -222,10 +222,10 @@ class ToyRobot:
 
     def command_off(self):
         """
-        Turns off robot and displays appropriate message.
+        Exits and displays appropriate message.
         """
         self.robot_say_message("Shutting down..", self.name)
-        # exit()
+        raise SystemExit
         
 
     def command_help(self):
@@ -297,9 +297,12 @@ def robot_start():
     robot.robot_get_name()
     robot.robot_say_message("Hello kiddo!", robot.name)
     command = [""]
-    while command[0] != "OFF":
+    while True: 
         command = robot.robot_get_command()
-        robot.robot_execute_command(command)
+        try:
+            robot.robot_execute_command(command)
+        except SystemExit:
+            break
 
 
 if __name__ == "__main__":

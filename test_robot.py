@@ -69,14 +69,6 @@ SPRINT\t- Move robot foward by [number] steps""", output)
             self.robby.position = (0,0)
 
 
-    def test_command_off(self):
-        with captured_io(StringIO()) as (out, err):
-            self.robby.robot_execute_command(["OFF"])
-        output = out.getvalue().strip()
-
-        self.assertIn("Shutting down..", output)
-    
-
     def test_turn(self):
         self.robby.rotation = 0
         self.robby.robot_execute_command(["LEFT"])
@@ -90,6 +82,15 @@ SPRINT\t- Move robot foward by [number] steps""", output)
         self.assertEqual(self.robby.rotation, 0)
 
 
+    def test_command_off(self):
+        with captured_io(StringIO()) as (out, err):
+            try:
+                self.robby.robot_execute_command(["OFF"])
+            except SystemExit:
+                ...
+        output = out.getvalue().strip()
+        self.assertEqual("Shutting down..", output)
+    
 
         
 
