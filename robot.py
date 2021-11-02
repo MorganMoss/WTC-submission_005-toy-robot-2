@@ -296,7 +296,6 @@ def robot_start():
     robot = ToyRobot()
     robot.robot_get_name()
     robot.robot_say_message("Hello kiddo!", robot.name)
-    command = [""]
     while True: 
         command = robot.robot_get_command()
         try:
